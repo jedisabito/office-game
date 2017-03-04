@@ -3,6 +3,10 @@
     {
       "date": "1/1/2000",
       "weather": "Rainy"
+    },
+    {
+      "date": "1/3/2000",
+      "weather": "Cloudy"
     }
   ],
   "weather_types": [

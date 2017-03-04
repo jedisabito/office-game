@@ -11,7 +11,7 @@ main_character = Player("Phil")
 
 while game_calendar.its_not_the_end():
     print game_calendar.date()
-    print "Weather: " + game_weather.get_weather(game_calendar.raw_date())
+    print game_weather.get_weather(game_calendar.raw_date())
     Activity()
     game_calendar.advance_day()
 
@@ -30,7 +30,7 @@ day by day loop:
        lunch (time 2)
        do work
        water cooler break (time 3)
-       take the elevator back home
+       take the elevator back down
     back home
        dinner (time 4)
        activities (time 5)

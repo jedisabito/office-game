@@ -1,5 +1,6 @@
 {
-  "name": "The Boss",
+  "name": "Boss",
   "outfits": [],
-  "locations": []
+  "locations": [],
+  "friendship": 0
 }

@@ -18,7 +18,7 @@ class TestWeather(unittest.TestCase):
             weather_data = json.loads(f.read())
             test_event = weather_data["events"][0]
             event_date = Weather.convert_date_to_tuple(test_event["date"])
-            self.assertEqual(self.test_weather.get_weather(event_date), test_event["weather"])
+            self.assertEqual(self.test_weather.get_raw_weather(event_date), test_event["weather"])
 
     def test_random_weather(self):
         random_weather = self.test_weather.random_weather()

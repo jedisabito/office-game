@@ -1,0 +1,89 @@
+{
+  "scenes": {
+    "001": [
+      {
+        "type": "narration",
+        "line": "The boss walks in."
+      },
+      {
+        "type": "basic_line",
+        "name": "Boss",
+        "line": "What's up?"
+      },
+      {
+        "type": "dialogue_option",
+        "name": "MC",
+        "choices": [
+          {
+            "line": "Not much.",
+            "flag": "",
+            "description": "You give a perfunctory answer."
+          },
+          {
+            "line": "Crazy football game last night!",
+            "flag": "football_game",
+            "description": "You talk excitedly about the game."
+          },
+          {
+            "line": "Eat a dick.",
+            "flag": "eat_dick",
+            "description": "You tell your boss to eat a dick."
+          }
+        ]
+      },
+      {
+        "type": "conditional_line",
+        "name": "Boss",
+        "trigger": {
+          "type": "flag",
+          "flag": "eat_dick"
+        },
+        "line": "You're an absolute madman and I respect that."
+      },
+      {
+        "type": "effect",
+        "trigger": {
+          "type": "flag",
+          "flag": "eat_dick"
+        },
+        "effect": {
+          "type": "character",
+          "character": "boss",
+          "result": "+2",
+          "description": "The boss is gleaming with pride..."
+        }
+      },
+      {
+        "type": "conditional_line",
+        "name": "Boss",
+        "trigger": {
+          "type": "flag",
+          "flag": "football_game"
+        },
+        "line": "So we must have been watching it at the same time! That's how live TV works, after all."
+      },
+      {
+        "type": "effect",
+        "trigger": {
+          "type": "flag",
+          "flag": "football_game"
+        },
+        "effect": {
+          "type": "stat",
+          "stat" : "Knowledge",
+          "result": "+1",
+          "description": "You never thought about it that way..."
+        }
+      },
+      {
+        "type": "basic_line",
+        "name": "Boss",
+        "line": "See you later."
+      },
+      {
+        "type": "narration",
+        "line": "The boss leaves."
+      }
+    ]
+  }
+}

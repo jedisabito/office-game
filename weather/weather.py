@@ -26,6 +26,12 @@ class Weather:
     def get_weather(self, date):
         for event in self.__events:
             if event["date"] == date:
+                return "Weather: " + event["weather"]
+        return "Weather: " + self.random_weather()
+
+    def get_raw_weather(self, date):
+        for event in self.__events:
+            if event["date"] == date:
                 return event["weather"]
         return self.random_weather()
 
