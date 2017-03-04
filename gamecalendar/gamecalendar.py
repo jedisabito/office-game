@@ -1,3 +1,7 @@
+import json
+from pkg_resources import resource_filename
+
+
 class Month:
     def __init__(self, name, days):
         self.__name = name
@@ -11,7 +15,7 @@ class Month:
 
 
 class Calendar:
-    def __init__(self, month, day, year):
+    def __init__(self, month=None, day=None, year=None):
         self.__MONTHS = [
             Month("January", 31),
             Month("February", 28),
@@ -26,11 +30,29 @@ class Calendar:
             Month("November", 30),
             Month("December", 31)
         ]
-        self.__current_day = {
-            "month": month,
-            "day": day,
-            "year": year
+        with open(resource_filename(self.__module__, '../story/calendar/calendar.json'), 'r') as f:
+            calendar_data = json.loads(f.read())
+            if month is None:
+                self.__current_day = self.convert_date_to_dict(calendar_data["start_date"])
+            else:
+                self.__current_day = {
+                    "month": month,
+                    "day": day,
+                    "year": year
+                }
+            self.__end_date = self.convert_date_to_dict(calendar_data["end_date"])
+
+    @staticmethod
+    def convert_date_to_dict(date):
+        raw_date = date.split("/")
+        return {
+            "month": int(raw_date[0]),
+            "day": int(raw_date[1]),
+            "year": int(raw_date[2])
         }
+
+    def its_not_the_end(self):
+        return self.__current_day != self.__end_date
 
     def week_day(self):
         month = self.__current_day["month"]
@@ -79,6 +101,9 @@ class Calendar:
         day_name = str(self.__current_day["day"]) + self.date_suffix()
         year_name = str(self.__current_day["year"])
         return '''Today's Date: %s, %s %s, %s''' % (day_of_week_name, month_name, day_name, year_name)
+
+    def raw_date(self):
+        return self.__current_day["month"], self.__current_day["day"], self.__current_day["year"]
 
     def date_suffix(self):
         day = self.__current_day["day"]

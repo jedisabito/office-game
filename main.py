@@ -1,17 +1,19 @@
-from calendar.calendar import Calendar
+from gamecalendar.gamecalendar import Calendar
 from player.player import Player
-from time.time import Time
+from gametime.time import Time
 from activity.activity import Activity
+from weather.weather import Weather
 
-game_calendar = Calendar(1, 0, 2000)
-end_date = Calendar(1, 3, 2000)
+game_calendar = Calendar()
 game_time = Time()
+game_weather = Weather()
 main_character = Player("Phil")
 
-while game_calendar.date() != end_date.date():
-    game_calendar.advance_day()
+while game_calendar.its_not_the_end():
     print game_calendar.date()
+    print "Weather: " + game_weather.get_weather(game_calendar.raw_date())
     Activity()
+    game_calendar.advance_day()
 
 print "Time stopped."
 

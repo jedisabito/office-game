@@ -1,5 +1,5 @@
 import unittest
-from calendar.calendar import Calendar
+from gamecalendar.gamecalendar import Calendar
 
 
 class TestCalendar(unittest.TestCase):
