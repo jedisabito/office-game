@@ -3,11 +3,11 @@ from pkg_resources import resource_filename
 
 
 class Player:
-    def __init__(self, name=None):
-        self.__name = name
-        self.__stats = {}
+    def __init__(self):
         with open(resource_filename(self.__module__,'../story/player/player.json'), 'r') as f:
             player_data = json.loads(f.read())
+            self.__name = player_data["name"]
+            self.__stats = {}
             for stat in player_data["stats"]:
                 self.__stats[stat] = 0
         self.__location = "Home"

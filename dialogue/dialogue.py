@@ -23,18 +23,19 @@ class Dialogue:
                 raw_input()
             elif line["type"] == "effect":
                 self.effect(line["trigger"], line["effect"], flags)
+            elif line["type"] == "dialogue_option":
+                flags = self.dialogue_option(line["choices"], flags)
             else:
                 if line["name"] == "MC":
                     name = player.get_name()
                 else:
-                    name = line["name"].upper()
+                    name = line["name"]
                 if line["type"] == "basic_line":
-                    print name + ": " + line["line"]
+                    print name.upper() + ": " + line["line"]
                     raw_input()
                 elif line["type"] == "conditional_line":
                     self.conditional_line(name, line, flags)
-                else:
-                    flags = self.dialogue_option(line["choices"], flags)
+
 
     @staticmethod
     def effect(trigger, effect, flags):
@@ -57,7 +58,7 @@ class Dialogue:
                     character.friendship_up()
                 elif effect["result"] == "+2":
                     character.friendship_way_up()
-                print effect["description"] + " (" + effect["result"] + ")"
+                print effect["description"] + " (friendship " + effect["result"] + ")"
             raw_input()
 
     @staticmethod

@@ -12,7 +12,6 @@
       },
       {
         "type": "dialogue_option",
-        "name": "MC",
         "choices": [
           {
             "line": "Not much.",
@@ -60,7 +59,7 @@
           "type": "flag",
           "flag": "football_game"
         },
-        "line": "So we must have been watching it at the same time! That's how live TV works, after all."
+        "line": "We must have been watching it at the same time! That's how live TV works, after all."
       },
       {
         "type": "effect",

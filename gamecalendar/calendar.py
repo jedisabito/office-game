@@ -42,6 +42,17 @@ class Calendar:
                 }
             self.__end_date = self.convert_date_to_dict(calendar_data["end_date"])
 
+    def write_out(self):
+        with open(resource_filename(self.__module__, '../game_data/date.json'), 'w+') as f:
+            f.write(json.dumps({
+                "current_day": self.__current_day
+            }))
+
+    def read_in(self):
+        with open(resource_filename(self.__module__, '../game_data/date.json'), 'r') as f:
+            date_data = json.loads(f.read())
+            self.__current_day = date_data["current_day"]
+
     @staticmethod
     def convert_date_to_dict(date):
         raw_date = date.split("/")
@@ -52,9 +63,14 @@ class Calendar:
         }
 
     def its_not_the_end(self):
+        self.read_in()
+        return self.its_not_the_end_util()
+
+    def its_not_the_end_util(self):
         return self.__current_day != self.__end_date
 
     def week_day(self):
+        self.read_in()
         month = self.__current_day["month"]
         day = self.__current_day["day"]
         year = self.__current_day["year"]
@@ -78,6 +94,11 @@ class Calendar:
         return week[day_of_week]
 
     def advance_day(self):
+        self.read_in()
+        self.advance_day_util()
+        self.write_out()
+
+    def advance_day_util(self):
         month_end = self.__MONTHS[self.__current_day["month"] - 1].get_days()
         if self.its_february_and_leap_year():
             month_end += 1
@@ -96,6 +117,7 @@ class Calendar:
         return self.__current_day["year"] % 4 == 0 and self.__current_day["month"] == 2
 
     def date(self):
+        self.read_in()
         day_of_week_name = self.week_day()
         month_name = self.__MONTHS[self.__current_day["month"] - 1].get_name()
         day_name = str(self.__current_day["day"]) + self.date_suffix()
@@ -103,6 +125,10 @@ class Calendar:
         return '''Today's Date: %s, %s %s, %s''' % (day_of_week_name, month_name, day_name, year_name)
 
     def raw_date(self):
+        self.read_in()
+        return self.raw_date_util()
+
+    def raw_date_util(self):
         return self.__current_day["month"], self.__current_day["day"], self.__current_day["year"]
 
     def date_suffix(self):
